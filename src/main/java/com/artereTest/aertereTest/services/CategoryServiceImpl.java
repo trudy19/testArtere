@@ -58,7 +58,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public ProductDTO addProductToCategory(Long categoryId, ProductDTO productDTO) {
+    public ProductDTO addProductToCategory(Long categoryId, ProductDTO productDTO) {////linked
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new CategoryNotFoundException(categoryId));
 
@@ -91,7 +91,7 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new CategoryNotFoundException(categoryId));
 
-        productRepository.deleteById(productId);
+        productRepository.deleteById(productId);///// delete this one pour fait unlinked
         category.getProducts().removeIf(product -> product.getId().equals(productId));
         categoryRepository.save(category);
     }

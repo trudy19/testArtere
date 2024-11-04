@@ -34,6 +34,7 @@ public class CartService {
 
     public CartDTO getCart(Long cartId) {
         Optional<Cart> cartOptional = cartRepository.findById(cartId);
+        /// thorw exception si il est null
         if (cartOptional.isPresent()) {
             Cart cart = cartOptional.get();
             CartDTO cartDTO = new CartDTO();
@@ -48,7 +49,7 @@ public class CartService {
     }
 
     public CartDTO addItemToCart(Long cartId, CartItemDTO cartItemDTO) {
-        Cart cart = cartRepository.findById(cartId).orElse(new Cart());
+        Cart cart = cartRepository.findById(cartId).orElse(new Cart());/// speraritoon de concept
         Product product = productRepository.findById(cartItemDTO.getProductId())
                 .orElseThrow(() -> new ProductNotFoundException("Product not found"));
         CartItem cartItem = new CartItem();
